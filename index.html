@@ -7,27 +7,26 @@
    <title>Curso Vue.js</title>
 </head>
 <body>
-   <div id="app">      
-      <h1>{{ titulo | uppercase}}</h1>
-      <h2>{{ subtitulo | capitalize}}</h2>        
+   <div id="app">     
+      <button @click="sumar">Sumar 1</button> 
+      <button @click="restar">Restar 1</button> 
+      El contador está en {{ contador }}
    </div>
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    <script>
       let app = new Vue({
          el: '#app',
          data: {
-            titulo: 'Estas en platzi',
-            subtitulo: 'estas viendo el curso de vjs'
+            contador: 0
          },
-         filters: {
-            uppercase: function (str ) {
-               return str.toUpperCase()
+         methods:{
+            sumar: function(){
+               this.contador++
             },
-            capitalize: function (str){
-               let capital = str.replace(str.charAt(0), str.charAt(0).toUpperCase())
-               return capital
+            restar: function(){
+               this.contador--
             }
-         }
+         }        
       })
    </script>
 </body>
