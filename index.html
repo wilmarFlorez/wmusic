@@ -7,39 +7,38 @@
    <title>Curso Vue.js</title>
 </head>
 <body>
-   <div id="app">     
-     <input type="text" name="nombre" placeholder="Ingresa tu nombre" v-model="nombre">
-     <p>Tu nombre en mayúscula es: {{ nombre | uppercase }}</p>
+   <div id="app">
      <form @submit.prevent="submit">
         <h2>¿Cúales son tus cursos favoritos?</h2>
-         <input v-model="cursos" type="checkbox" id="vue" value="vue">
-         <label for="vue">Curso de Vue.js</label>
-         <input v-model="cursos" type="checkbox" id="seo" value="seo">
-         <label for="seo">Curso de SEO</label>
-         <input v-model="cursos" type="checkbox" id="react" value="react">
-         <label for="react">Curso de React y Redux</label>
-         <input v-model="cursos" type="checkbox" id="growth" value="growth">
-         <label for="growth">Curso de Growth Marketing</label>
-         <button type="submit">Enviar</button>
-     </form>
+        <template v-for="curso in cursos">
+           <input v-model="cursosSeleccionados" type="checkbox" v-bind:id="curso.value" v-bind:value="curso.value">
+           <label v-bind:for="curso.value">{{ curso.nombre }}</label>           
+        </template>
+        <button type="submit">Enviar</button>
+      </form>
    </div>
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    <script>
       let app = new Vue({
          el: '#app',
          data: {
-            nombre: '',
-            cursos: []
-         },
-         filters:{
-            uppercase: function(str){
-               return str.toUpperCase()
-            }
+            cursos: [
+               {nombre: 'Curso de Vue.js',
+               value: 'vue'},
+               {nombre: 'Curso de SEO',
+               value: 'seo'},
+               {nombre: 'Curso de React y Redux',
+               value: 'react'},
+               {nombre: 'Curso de Growth',
+               value: 'growth'}
+
+            ],
+            cursosSeleccionados: []
          },
          methods: {
             submit: function(){
                console.log('metodo submit')
-               console.log(this.cursos)
+               console.log(this.cursosSeleccionados)
             }
          }        
       })
