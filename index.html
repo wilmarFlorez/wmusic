@@ -7,22 +7,26 @@
    <title>Curso Vue.js</title>
 </head>
 <body>
-   <div id="app">
-      <template v-if="mostrar">
-         <h1>Mi titulo</h1>
-         <h2>Mi subtitulo</h2>
-         <a :href="url" target="_blank">Ir a {{ pagina }}</a>         
-      </template>   
-       
+   <div id="app">      
+      <h1>{{ titulo | uppercase}}</h1>
+      <h2>{{ subtitulo | capitalize}}</h2>        
    </div>
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    <script>
       let app = new Vue({
          el: '#app',
          data: {
-            url: 'https://google.com',
-            pagina: 'Google',
-            mostrar: true
+            titulo: 'Estas en platzi',
+            subtitulo: 'estas viendo el curso de vjs'
+         },
+         filters: {
+            uppercase: function (str ) {
+               return str.toUpperCase()
+            },
+            capitalize: function (str){
+               let capital = str.replace(str.charAt(0), str.charAt(0).toUpperCase())
+               return capital
+            }
          }
       })
    </script>
